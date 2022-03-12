@@ -14,7 +14,7 @@ In C(++)
 <dt> * </dt>		<dd> Zero or more of the following expression </dd>
 <dt> + </dt>		<dd> One or more of the following expression </dd>
 <dt> (expr) </dt>	<dd> Group subexpressions (does not imply capture) </dd>
-<dt> |A|B... </dt>	<dd> Either A or B (or ...) </dd>
+<dt> |A|B... </dt>	<dd> Either A or B (or ...). Note that the first alternative has a preceding |  </dd>
 <dt> &A </dt>		<dd> Continue only if A succeeds </dd>
 <dt> !A </dt>		<dd> Continue only if A fails </dd>
 <dt> anychar </dt>	<dd> match that non-operator character </dd>
@@ -28,20 +28,40 @@ In C(++)
 <dt> [^a-z] </dt>	<dd> Negated character class. Characters may include the \escapes listed above </dd>
 </dl>
 
-## NOT YET IMPLEMENTED:
+### NOT YET IMPLEMENTED:
 <dl>
 <dt> {n,m} </dt>	<dd> match from n (default 0) to m (default unlimited) repetitions of the following expression. </dd>
-<dt> &lt;name%gt; </dt>	<dd> Call the callout function passing the specified name. </dd>
+<dt> &lt;name&gt; </dt>	<dd> Call the callout function passing the specified name. </dd>
 <dt> Captures. </dt>
 
 ## Note:
 Possessive alternates and possessive repetition will never backtrack.
-Once an alternate has matched, no subsequent alterative will be tried in that group.
+Once an alternate has matched, no subsequent alternative will be tried in that group.
 Once a repetition has been made, it will never be unwound.
 It is your responsibility to ensure these possessive operators never match unless it's final.
 You should use negative assertions to control inappropriate greed.
 
 ## Example
+
+	const char*	text = "abcdeefcdcddcf";
+	const char*	search = text;
+
+	int		length = pegex_match("+(!(dc)[a-e][c-f])", search);
+	if (length >= 0)
+		printf("%.*s\n", length, search);
+
+Prints:
+
+	bcdeefcdcd
+
+Explanation:
+
+	+	One of more repetitions of the following group
+	(	Start group
+	!(dc)	Negative assertion: fail (and stop repeating) if we're looking at "dc"
+	[a-e]	Any character from a to e inclusive
+	[c-f]	Any character from c to f inclusive
+	)	end of group
 
 ## LICENSE
 
