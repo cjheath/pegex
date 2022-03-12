@@ -1,0 +1,25 @@
+#! /bin/bash
+#
+# Usage: runtest < test_cases
+#
+
+while IFS="	" read pegex text offset result comment
+do
+	if [ "$pegex" = '' ]
+	then		# Blank line
+		echo
+	elif [ "${pegex%%# *}" = '' ]
+	then		# Comment line
+		echo "$pegex $text	$offset	$result	$comment"
+	else
+		./pegexp "$pegex" "$text" |
+		(
+			IFS="	" read pegex1 text1 offset1 result1;
+			echo "$pegex1	$text1	$offset1	$result1	$comment"
+
+			if [ "$offset" != "$offset1" -o "$result" != "$result1" ]
+			then	echo "Test Failed, got $offset1 $result1 should be $offset $result"
+			fi
+		)
+	fi | expand -t 32,48,56,64 |unexpand -a
+done
