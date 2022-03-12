@@ -17,15 +17,15 @@ In C(++)
 <dt> |A|B... </dt>	<dd> Either A or B (or ...) </dd>
 <dt> &A </dt>		<dd> Continue only if A succeeds </dd>
 <dt> !A </dt>		<dd> Continue only if A fails </dd>
-<dt> anychar </dt>	<dd> match that non<dt>operator character </dd>
+<dt> anychar </dt>	<dd> match that non-operator character </dd>
 <dt> \char </dt>	<dd> match the escaped character (including any operator, \0 \b \e \f \n \r \t, and any other char) </dd>
 <dt> \177 </dt>		<dd> match the specified octal character </dd>
-<dt> \xXX </dt>		<dd> match the specified hexadecimal (0<dt>9a<dt>fA<dt>F) </dd>
-<dt> \x{1<dt>2} </dt>	<dd> match the specified hexadecimal (0<dt>9a<dt>fA<dt>F) </dd>
-<dt> \u12345 </dt>	<dd> match the specified 1<dt>5 digit Unicode character (only if compiled for Unicode support) </dd>
-<dt> \u{1<dt>5} </dt>	<dd> match the specified 1<dt>5 digit Unicode character (only if compiled for Unicode support) </dd>
-<dt> [a<dt>z] </dt>	<dd> Normal character class (a literal hyphen may occur at start) </dd>
-<dt> [^a<dt>z] </dt>	<dd> Negated character class. Characters may include the \escapes listed above </dd>
+<dt> \xXX </dt>		<dd> match the specified hexadecimal (0-9a-fA-F) </dd>
+<dt> \x{1-2} </dt>	<dd> match the specified hexadecimal (0-9a-fA-F) </dd>
+<dt> \u12345 </dt>	<dd> match the specified 1-5 digit Unicode character (only if compiled for Unicode support) </dd>
+<dt> \u{1-5} </dt>	<dd> match the specified 1-5 digit Unicode character (only if compiled for Unicode support) </dd>
+<dt> [a-z] </dt>	<dd> Normal character class (a literal hyphen may occur at start) </dd>
+<dt> [^a-z] </dt>	<dd> Negated character class. Characters may include the \escapes listed above </dd>
 </dl>
 
 ## NOT YET IMPLEMENTED:
