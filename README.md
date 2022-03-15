@@ -1,6 +1,6 @@
-## pegex
+## pegexp
 
-Pegular expressions, aka Pegex, formally "regular PEGs".
+Pegular expressions, aka Pegexp, formally "regular PEGs".
 Possessive regular expressions using prefix operators.
 Like regular expressions but prefix notation and possessive behaviour.
 In C(++)
@@ -45,8 +45,9 @@ You should use negative assertions to control inappropriate greed.
 
 	const char*	text = "abcdeefcdcddcf";
 	const char*	search = text;
+	Pegex<>		pegexp("+(!(dc)[a-e][c-f])");
 
-	int		length = pegex_match("+(!(dc)[a-e][c-f])", search);
+	int		length = pegexp.match(search);
 	if (length >= 0)
 		printf("%.*s\n", length, search);
 
